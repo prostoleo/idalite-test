@@ -1,5 +1,7 @@
 # idalite-test
 
+Тестовое задание на позицию Junior Frontend Developer в idalite
+
 ## Build Setup
 
 ```bash

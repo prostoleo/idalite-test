@@ -17,7 +17,25 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: true,
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap',
+      },
+      //       <link rel="preconnect" href="https://fonts.googleapis.com">
+      // <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      // <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet"></link>
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

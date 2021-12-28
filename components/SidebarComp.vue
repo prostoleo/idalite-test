@@ -49,6 +49,18 @@ export default {
 
   width: 100%;
 
+  @include mq(xlg) {
+    position: unset;
+
+    flex: 1 1 33.2rem;
+  }
+
   // flex-grow: 1;
+}
+
+.btn-toggle-sidebar {
+  @include mq(xlg) {
+    display: none;
+  }
 }
 </style>

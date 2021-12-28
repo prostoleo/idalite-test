@@ -29,6 +29,10 @@ export default {}
 @use '../assets/scss/main.scss' as *;
 
 main {
+  @include mq(xlg) {
+    flex: 1 1 100%;
+  }
+
   .sort-cards {
     display: block;
     margin-left: auto;

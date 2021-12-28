@@ -1,5 +1,6 @@
 <template>
-  <div class="card-list__item card">
+  <!-- class="card-list__item card" -->
+  <li class="card-list__item card">
     <header class="card__header">
       <img
         :src="info.imgSrc"
@@ -23,7 +24,7 @@
     <button class="btn card__delete">
       <img src="/delete.svg" alt="удалить товар" />
     </button>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -65,19 +66,24 @@ export default {
   // .card__header
 
   &__header {
-    object-fit: cover;
   }
 
   // .card__img
 
   &__img {
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 0.4rem 0.4rem 0 0;
+    object-fit: cover;
   }
 
   // .card__content
 
   &__content {
     padding: 1.6rem 1.6rem 2.4rem 1.6rem;
+
+    display: grid;
+    grid-template-rows: 1fr auto;
   }
 
   // .card__body
@@ -137,6 +143,10 @@ export default {
     padding: 0.8em;
 
     transition: all 150ms ease-in-out;
+
+    @include mq(med) {
+      transform: translate(50%, -50%);
+    }
   }
 }
 </style>

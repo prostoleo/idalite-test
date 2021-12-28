@@ -27,6 +27,8 @@ export default {}
   box-shadow: 0 0.2rem 0.4rem $dark-shadow;
   // border: 1px solid transparent;
 
+  letter-spacing: -2%;
+
   transition: all 150ms ease-in-out;
 
   &:hover {
@@ -40,6 +42,12 @@ export default {}
   &:focus {
     outline: 2px solid $outline;
     outline-offset: 0.2em;
+  }
+
+  &:disabled {
+    background: $disabled;
+    color: $greyish;
+    cursor: not-allowed;
   }
 }
 </style>

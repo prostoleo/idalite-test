@@ -44,7 +44,11 @@ body {
 .page--content {
   position: relative;
 
-  /* display: flex;
-  align-items: flex-start; */
+  @include mq(xlg) {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 1.6rem;
+  }
 }
 </style>

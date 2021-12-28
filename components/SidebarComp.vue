@@ -41,8 +41,14 @@ export default {
 @use '../assets/scss/main.scss' as *;
 
 .sidebar-wrapper {
-  position: relative;
+  // position: relative;
+  position: absolute;
+  top: 0.6rem;
+  left: 0;
+  right: 0;
 
-  flex-grow: 1;
+  width: 100%;
+
+  // flex-grow: 1;
 }
 </style>

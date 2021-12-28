@@ -79,11 +79,13 @@ export default {}
   //.form--wrapper
   &--wrapper {
     position: absolute;
+    z-index: 10;
     top: 0;
     left: 0;
+    right: 0;
 
-    width: 33.2rem;
-
+    max-width: 33.2rem;
+    width: 100%;
     // width: 100%;
     padding: 2.4rem 2.2rem 2.4rem 2.6rem;
 

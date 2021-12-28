@@ -44,7 +44,7 @@ body {
 .page--content {
   position: relative;
 
-  display: flex;
-  align-items: flex-start;
+  /* display: flex;
+  align-items: flex-start; */
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="card-list--wrapper">
-    <transition-group name="list" tag="ul" class="card-list">
+    <div v-if="loadingComp" class="for-loader" name="fading-circle"></div>
+    <transition-group v-else name="list" tag="ul" class="card-list">
       <CardItem
         v-for="card in currentCards"
         :key="card.id"
@@ -132,6 +133,10 @@ export default {
 
       return this.cards
     },
+
+    loadingComp() {
+      return window.$nuxt.$loading.percent > 0
+    },
   },
 
   methods: {
@@ -159,6 +164,10 @@ export default {
   transition: transform 0.5s ease-out;
 }
 
+.for-loader {
+  width: 100%;
+}
+
 .card-list {
   display: grid;
 
@@ -169,6 +178,7 @@ export default {
   justify-items: start;
 
   @include mq(xlg) {
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 33.2rem));
     justify-items: end;
   }
 

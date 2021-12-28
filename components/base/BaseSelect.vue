@@ -1,5 +1,12 @@
 <template>
-  <div class="custom-select" :tabindex="tabindex" @blur="open = false">
+  <div
+    class="custom-select"
+    :tabindex="tabindex"
+    @keydown.space="openSelectOnSpace"
+  >
+    <!-- @focusout.stop="focusOut" -->
+    <!-- @blur.exact="open = false" -->
+    <!-- @focus="focusSelect" -->
     <div
       class="custom-select__selected"
       :class="{ open: open }"
@@ -12,7 +19,10 @@
       <div
         v-for="(option, i) of options"
         :key="i"
+        tabindex="0"
+        @focus="open = true"
         @click="chooseOption(option)"
+        @keydown.enter="chooseOption(option)"
       >
         {{ option }}
       </div>
@@ -33,9 +43,9 @@ export default {
       default: null,
     },
     tabindex: {
-      type: Number,
+      type: String,
       required: false,
-      default: 0,
+      default: '0',
     },
   },
   data() {
@@ -58,6 +68,30 @@ export default {
       this.open = false
       this.$emit('select', opt)
     },
+
+    openSelectOnSpace(e) {
+      e.preventDefault()
+
+      if (e.code === 'Space') {
+        this.open = true
+      }
+    },
+
+    /* focusOut(e) {
+      // console.log('e: ', e);
+      const { originalTarget } = e
+      const target = e.target.closest('.custom-select')
+
+      if (!target || originalTarget === target) return
+      console.log('target: ', target)
+
+      const elems = target.querySelectorAll(':focus')
+      console.log('elems: ', elems)
+
+      if (elems.length === 0) {
+        this.open = false
+      }
+    }, */
   },
 }
 </script>
@@ -70,6 +104,10 @@ export default {
   width: max-content;
 
   margin-left: auto;
+
+  &:focus {
+    outline: 1px solid $outline;
+  }
 
   // .custom-select__selected
 
@@ -118,7 +156,7 @@ export default {
     background-color: $bg-card;
     color: $light-grey;
     border-radius: 0 0 0.4rem 0.4rem;
-    overflow: hidden;
+    // overflow: hidden;
     // border-right: 1px solid #ad8225;
     // border-left: 1px solid #ad8225;
     // border-bottom: 1px solid #ad8225;
@@ -126,6 +164,9 @@ export default {
     box-shadow: 0 0.2rem 0.5rem $dark-shadow;
 
     div {
+      font-size: 1.2rem;
+      font-weight: 400;
+
       color: $light-grey;
       padding: 1em;
       cursor: pointer;
@@ -134,6 +175,10 @@ export default {
       &:hover {
         background-color: $green;
         color: $white;
+      }
+
+      &:focus {
+        outline: 1px solid $outline;
       }
     }
   }

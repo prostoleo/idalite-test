@@ -52,7 +52,7 @@ export default {
   @include mq(xlg) {
     position: unset;
 
-    flex: 1 1 33.2rem;
+    flex: 1 0 33.2rem;
   }
 
   // flex-grow: 1;

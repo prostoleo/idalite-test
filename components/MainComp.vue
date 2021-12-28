@@ -30,8 +30,6 @@ export default {
 
   methods: {
     selectOption(option) {
-      console.log('option: ', option)
-      // console.log();
       this.currentOption = option
     },
   },

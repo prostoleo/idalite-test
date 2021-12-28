@@ -11,6 +11,7 @@
         >
         <input
           id="form-name"
+          v-model="form.name.value"
           type="text"
           class="form__input"
           :class="{ error: form.name.error }"
@@ -30,6 +31,7 @@
         </label>
         <textarea
           id="form-description"
+          v-model="form.description.value"
           class="form__input form__input--textarea"
           :class="{ error: form.description.error }"
           placeholder="Введите описание товара"
@@ -47,6 +49,7 @@
         >
         <input
           id="form-image"
+          v-model="form.imgHref.value"
           type="text"
           class="form__input"
           :class="{ error: form.imgHref.error }"
@@ -66,6 +69,7 @@
         </label>
         <input
           id="form-price"
+          v-model="form.price.value"
           type="text"
           class="form__input"
           :class="{ error: form.price.error }"

@@ -38,6 +38,13 @@ export default {
     ],
   },
 
+  // loadingIndicator
+  loadingIndicator: {
+    name: 'chasing-dots',
+    color: 'hsla(112, 27%, 57%, 100%)',
+    background: 'white',
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 

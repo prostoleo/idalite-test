@@ -21,7 +21,7 @@
         <span class="card__price"> {{ formattedPrice }} руб. </span>
       </footer>
     </div>
-    <button class="btn card__delete">
+    <button class="btn card__delete" @click="deleteItem(info.id)">
       <img src="/delete.svg" alt="удалить товар" />
     </button>
   </li>
@@ -35,10 +35,17 @@ export default {
       required: true,
     },
   },
+  emits: ['delete-card'],
 
   computed: {
     formattedPrice() {
       return new Intl.NumberFormat(navigator.locale).format(this.info.price)
+    },
+  },
+
+  methods: {
+    deleteItem(id) {
+      this.$emit('delete-card', id)
     },
   },
 }

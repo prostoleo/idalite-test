@@ -1,15 +1,26 @@
 <template>
   <div class="card-list--wrapper">
     <transition-group name="list" tag="ul" class="card-list">
-      <!-- <ul class="card-list"> -->
-      <CardItem v-for="card in cards" :key="card.id" :info="card" />
-      <!-- </ul> -->
+      <CardItem
+        v-for="card in currentCards"
+        :key="card.id"
+        :info="card"
+        @delete-card="deleteCard"
+      />
     </transition-group>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    sortBy: {
+      type: String,
+      required: true,
+      default: 'по умолчанию',
+    },
+  },
+
   data() {
     return {
       cards: [
@@ -106,21 +117,59 @@ export default {
       ],
     }
   },
+
+  computed: {
+    currentCards() {
+      if (this.sortBy === 'по наименованию') {
+        return this.cards.slice().sort((a, b) => a.name.localeCompare(b.name))
+      }
+      if (this.sortBy === 'по возрастанию цены') {
+        return this.cards.slice().sort((a, b) => a.price - b.price)
+      }
+      if (this.sortBy === 'по убыванию цены') {
+        return this.cards.slice().sort((a, b) => b.price - a.price)
+      }
+
+      return this.cards
+    },
+  },
+
+  methods: {
+    deleteCard(id) {
+      this.cards = this.cards.slice().filter((card) => card.id !== id)
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/main.scss' as *;
 
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(50%);
+}
+
+.list-move {
+  transition: transform 0.5s ease-out;
+}
+
 .card-list {
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 33.2rem));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
 
   gap: 1.6rem;
 
+  justify-items: start;
+
   @include mq(xlg) {
-    justify-content: flex-end;
+    justify-items: end;
   }
 
   &--wrapper {
@@ -129,15 +178,17 @@ export default {
 
   &__item {
     width: 100%;
+    max-width: 33.2em;
 
     display: grid;
     grid-template-rows: 20rem 1fr;
+    // justify-self: start;
 
     border-radius: 0.4rem;
 
-    position: relative;
-
     box-shadow: 0 2rem 3rem $shadow, 0 0.6rem 1rem $light-shadow;
+
+    position: relative;
   }
 }
 </style>

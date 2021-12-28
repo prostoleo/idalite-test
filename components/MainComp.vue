@@ -1,20 +1,6 @@
 <template>
   <main>
     <div class="sort-cards--wrapper">
-      <!-- <select class="sort-cards">
-        <option value="по умолчанию" class="sort-cards__option">
-          По умолчанию
-        </option>
-        <option value="по наименованию" class="sort-cards__option">
-          По наименованию
-        </option>
-        <option value="по возрастанию цены" class="sort-cards__option">
-          По возрастанию цены
-        </option>
-        <option value="по убыванию цены" class="sort-cards__option">
-          По убыванию цены
-        </option>
-      </select> -->
       <BaseSelect
         :options="options"
         :default="defaultOption"
@@ -23,7 +9,7 @@
       />
     </div>
 
-    <CardList />
+    <CardList :sort-by="currentOption" />
   </main>
 </template>
 
@@ -38,6 +24,7 @@ export default {
         'по убыванию цены',
       ],
       defaultOption: 'по умолчанию',
+      currentOption: 'по умолчанию',
     }
   },
 
@@ -45,6 +32,7 @@ export default {
     selectOption(option) {
       console.log('option: ', option)
       // console.log();
+      this.currentOption = option
     },
   },
 }

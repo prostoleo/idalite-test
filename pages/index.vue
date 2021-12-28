@@ -45,8 +45,10 @@ body {
   position: relative;
 
   @include mq(xlg) {
+    position: unset;
     display: flex;
-    align-items: flex-start;
+    // align-items: flex-start;
+    align-items: stretch;
 
     gap: 1.6rem;
   }

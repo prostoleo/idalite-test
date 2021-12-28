@@ -150,6 +150,8 @@ export default {
 
   gap: 1.6rem;
 
+  position: relative;
+
   @include mq(xlg) {
     max-width: 33.2rem;
     width: 100%;
@@ -162,6 +164,9 @@ export default {
 
     border-radius: 0.4rem;
     box-shadow: 0 2rem 3rem $shadow, 0 0.6rem 1rem $light-shadow;
+
+    position: sticky;
+    top: 2.4rem;
   }
 
   //.form--wrapper
@@ -196,6 +201,9 @@ export default {
       padding: 0;
       background: unset;
       z-index: unset;
+
+      // для того чтобы position sticky работало
+      height: 100%;
     }
 
     &.active {

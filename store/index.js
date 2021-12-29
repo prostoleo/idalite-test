@@ -89,7 +89,6 @@ export const state = () => ({
 
 export const getters = {
   getCards: (state) => {
-    console.log('state.cards: ', state.cards);
     localStorage.setItem('cards', JSON.stringify(state.cards));
     return state.cards;
   },
@@ -97,7 +96,6 @@ export const getters = {
 
 export const actions = {
   addCard(context, cardData) {
-    console.log('cardData - action addCard: ', cardData);
     context.commit('addCard', cardData);
   },
   deleteCard(context, id) {

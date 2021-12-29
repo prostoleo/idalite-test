@@ -76,7 +76,6 @@
           placeholder="Введите цену"
           @input="validateInput('price', $event)"
         />
-        <!-- @input="maskPrice" -->
         <small v-if="form.price.error" class="form__error-msg">
           Это поле является обязательным
         </small>
@@ -130,21 +129,8 @@ export default {
     };
   },
 
-  computed: {},
-
-  watch: {},
-
   methods: {
     validateInput(field, event) {
-      console.log('event: ', event);
-
-      /* if (field === 'price') {
-        // this.maskPrice(event.target.value);
-        this.form[field].value = parseInt(
-          this.form[field].value
-        ).toLocaleString('ru-RU');
-      } */
-
       this.form[field].touched = true;
 
       if (this.form[field].value === '' && this.form[field].required) {
@@ -159,17 +145,6 @@ export default {
       this.checkAllValidity(field);
     },
 
-    maskPrice(x) {
-      console.log('x: ', x);
-      /* this.form.price.value = this.form.price.value
-        .slice()
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ' '); */
-      this.form.price.value = x
-        .slice()
-        .toString()
-        .replaceAll(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    },
     checkAllValidity() {
       const isAllReqInputsValid = Object.entries(this.form).every(
         ([key, value]) => {
@@ -177,7 +152,6 @@ export default {
           return value.required ? !value.error && value.touched : true;
         }
       );
-      console.log('isAllReqInputsValid: ', isAllReqInputsValid);
 
       if (isAllReqInputsValid) {
         this.totalError = false;
@@ -195,8 +169,6 @@ export default {
         imgSrc: this.form.imgSrc.value,
         price: parseFloat(this.form.price.value),
       };
-
-      console.log('newItem: ', newItem);
 
       this.resetForm();
       this.$emit('close-form');

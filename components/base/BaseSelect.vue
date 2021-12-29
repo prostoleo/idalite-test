@@ -54,38 +54,37 @@ export default {
         ? this.options[0]
         : null,
       open: false,
-    }
+    };
   },
   mounted() {
-    this.$emit('select', this.selected)
+    this.$emit('select', this.selected);
   },
 
   methods: {
     chooseOption(opt) {
-      this.selected = opt
-      this.open = false
-      this.$emit('select', opt)
+      this.selected = opt;
+      this.open = false;
+      this.$emit('select', opt);
     },
 
     openSelectOnSpace(e) {
-      e.preventDefault()
+      e.preventDefault();
 
       if (e.code === 'Space') {
-        this.open = true
+        this.open = true;
       }
     },
 
     escapeSelect(e) {
-      const target = e.target.closest('.custom-select')
-      console.log('target: ', target)
+      const target = e.target.closest('.custom-select');
 
-      if (!target) return
+      if (!target) return;
 
-      target.focus()
-      this.open = false
+      target.focus();
+      this.open = false;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

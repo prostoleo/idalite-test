@@ -3,10 +3,8 @@
     class="custom-select"
     :tabindex="tabindex"
     @keydown.space="openSelectOnSpace"
+    @keydown.esc="escapeSelect"
   >
-    <!-- @focusout.stop="focusOut" -->
-    <!-- @blur.exact="open = false" -->
-    <!-- @focus="focusSelect" -->
     <div
       class="custom-select__selected"
       :class="{ open: open }"
@@ -77,21 +75,15 @@ export default {
       }
     },
 
-    /* focusOut(e) {
-      // console.log('e: ', e);
-      const { originalTarget } = e
+    escapeSelect(e) {
       const target = e.target.closest('.custom-select')
-
-      if (!target || originalTarget === target) return
       console.log('target: ', target)
 
-      const elems = target.querySelectorAll(':focus')
-      console.log('elems: ', elems)
+      if (!target) return
 
-      if (elems.length === 0) {
-        this.open = false
-      }
-    }, */
+      target.focus()
+      this.open = false
+    },
   },
 }
 </script>
@@ -156,10 +148,6 @@ export default {
     background-color: $bg-card;
     color: $light-grey;
     border-radius: 0 0 0.4rem 0.4rem;
-    // overflow: hidden;
-    // border-right: 1px solid #ad8225;
-    // border-left: 1px solid #ad8225;
-    // border-bottom: 1px solid #ad8225;
 
     box-shadow: 0 0.2rem 0.5rem $dark-shadow;
 

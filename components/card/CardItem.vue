@@ -1,6 +1,6 @@
 <template>
   <!-- class="card-list__item card" -->
-  <li class="card-list__item card">
+  <li :key="info.id" class="card-list__item card">
     <header class="card__header">
       <img
         :src="info.imgSrc"
@@ -35,20 +35,19 @@ export default {
       required: true,
     },
   },
-  emits: ['delete-card'],
 
   computed: {
     formattedPrice() {
-      return new Intl.NumberFormat(navigator.locale).format(this.info.price)
+      return new Intl.NumberFormat(navigator.locale).format(this.info.price);
     },
   },
 
   methods: {
     deleteItem(id) {
-      this.$emit('delete-card', id)
+      this.$store.dispatch('deleteCard', id);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -80,8 +79,11 @@ export default {
   &__img {
     max-width: 100%;
     max-height: 100%;
+    width: 100%;
     border-radius: 0.4rem 0.4rem 0 0;
-    object-fit: cover;
+    object-fit: contain;
+
+    margin: 0 auto;
   }
 
   // .card__content

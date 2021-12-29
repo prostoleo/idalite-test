@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'IndexPage',
-}
+};
 </script>
 
 <style lang="scss">
@@ -36,7 +36,7 @@ body {
   max-width: 1376px;
   margin: 0 auto;
 
-  width: 95%;
+  width: 95.56%;
 
   padding: 3.2rem 0;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="form--wrapper">
     <h2 class="sidebar__title">Добавление товара</h2>
-    <form class="form" @submit.prevent="submitForm">
+    <form ref="formEl" class="form" @submit.prevent="submitForm">
       <div class="form__row">
         <label
           for="#form-name"
@@ -16,7 +16,7 @@
           class="form__input"
           :class="{ error: form.name.error }"
           placeholder="Введите наименование товара"
-          @input="validateInput('name')"
+          @input="validateInput('name', $event)"
         />
         <small v-if="form.name.error" class="form__error-msg">
           Это поле является обязательным
@@ -36,7 +36,7 @@
           class="form__input form__input--textarea"
           :class="{ error: form.description.error }"
           placeholder="Введите описание товара"
-          @input="validateInput('description')"
+          @input="validateInput('description', $event)"
         ></textarea>
       </div>
       <div class="form__row">
@@ -53,7 +53,7 @@
           class="form__input"
           :class="{ error: form.imgSrc.error }"
           placeholder="Введите ссылку"
-          @input="validateInput('imgSrc')"
+          @input="validateInput('imgSrc', $event)"
         />
         <small v-if="form.imgSrc.error" class="form__error-msg">
           Это поле является обязательным
@@ -69,12 +69,12 @@
         </label>
         <input
           id="form-price"
-          v-model.trim="form.price.value"
+          v-model="form.price.value"
           type="text"
           class="form__input"
           :class="{ error: form.price.error }"
           placeholder="Введите цену"
-          @change="validateInput('price')"
+          @input="validateInput('price', $event)"
         />
         <!-- @input="maskPrice" -->
         <small v-if="form.price.error" class="form__error-msg">
@@ -95,7 +95,7 @@
 
 <script>
 export default {
-  emits: ['add-card'],
+  emits: ['close-form'],
 
   data() {
     return {
@@ -135,7 +135,16 @@ export default {
   watch: {},
 
   methods: {
-    validateInput(field) {
+    validateInput(field, event) {
+      console.log('event: ', event);
+
+      /* if (field === 'price') {
+        // this.maskPrice(event.target.value);
+        this.form[field].value = parseInt(
+          this.form[field].value
+        ).toLocaleString('ru-RU');
+      } */
+
       this.form[field].touched = true;
 
       if (this.form[field].value === '' && this.form[field].required) {
@@ -150,16 +159,20 @@ export default {
       this.checkAllValidity(field);
     },
 
-    /* maskPrice() {
-      this.form.price.value = this.form.price.value
+    maskPrice(x) {
+      console.log('x: ', x);
+      /* this.form.price.value = this.form.price.value
         .slice()
         .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    }, */
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ' '); */
+      this.form.price.value = x
+        .slice()
+        .toString()
+        .replaceAll(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    },
     checkAllValidity() {
       const isAllReqInputsValid = Object.entries(this.form).every(
         ([key, value]) => {
-          console.log({ key, value });
           // return !value.error && value.touched;
           return value.required ? !value.error && value.touched : true;
         }
@@ -176,7 +189,7 @@ export default {
       if (this.totalError || this.disableSubmit) return;
 
       const newItem = {
-        id: parseFloat(Date.now().toString().slice(-4)),
+        id: parseInt(Date.now().toString().slice(-4)),
         name: this.form.name.value,
         description: this.form.description.value,
         imgSrc: this.form.imgSrc.value,
@@ -185,7 +198,20 @@ export default {
 
       console.log('newItem: ', newItem);
 
-      this.$emit('add-card', newItem);
+      this.resetForm();
+      this.$emit('close-form');
+      this.$store.dispatch('addCard', newItem);
+    },
+
+    resetForm() {
+      this.totalError = false;
+      this.disableSubmit = true;
+
+      Object.values(this.form).forEach((item) => {
+        item.touched = false;
+        item.error = false;
+        item.value = '';
+      });
     },
   },
 };

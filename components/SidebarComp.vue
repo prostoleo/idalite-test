@@ -11,7 +11,10 @@
         alt="Иконка открыть / закрыть меню"
       />
     </button>
-    <AddGoodForm :class="{ active: isSidebarOpen }" />
+    <AddGoodForm
+      :class="{ active: isSidebarOpen }"
+      @close-form="isSidebarOpen = false"
+    />
   </aside>
 </template>
 
@@ -19,9 +22,7 @@
 export default {
   data() {
     return {
-      // ! потом вернуть обратно
-      // isSidebarOpen: false,
-      isSidebarOpen: true,
+      isSidebarOpen: false,
     };
   },
 

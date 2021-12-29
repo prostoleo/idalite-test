@@ -1,7 +1,7 @@
 <template>
   <div class="form--wrapper">
     <h2 class="sidebar__title">Добавление товара</h2>
-    <form class="form">
+    <form class="form" @submit.prevent="submitForm">
       <div class="form__row">
         <label
           for="#form-name"
@@ -11,11 +11,12 @@
         >
         <input
           id="form-name"
-          v-model="form.name.value"
+          v-model.trim="form.name.value"
           type="text"
           class="form__input"
           :class="{ error: form.name.error }"
           placeholder="Введите наименование товара"
+          @input="validateInput('name')"
         />
         <small v-if="form.name.error" class="form__error-msg">
           Это поле является обязательным
@@ -31,31 +32,30 @@
         </label>
         <textarea
           id="form-description"
-          v-model="form.description.value"
+          v-model.trim="form.description.value"
           class="form__input form__input--textarea"
           :class="{ error: form.description.error }"
           placeholder="Введите описание товара"
+          @input="validateInput('description')"
         ></textarea>
-        <small v-if="form.description.error" class="form__error-msg">
-          Это поле является обязательным
-        </small>
       </div>
       <div class="form__row">
         <label
           for="form-image"
           class="form__label"
-          :class="{ required: form.imgHref.required }"
+          :class="{ required: form.imgSrc.required }"
           >Ссылка на изображение товара</label
         >
         <input
           id="form-image"
-          v-model="form.imgHref.value"
+          v-model.trim="form.imgSrc.value"
           type="text"
           class="form__input"
-          :class="{ error: form.imgHref.error }"
+          :class="{ error: form.imgSrc.error }"
           placeholder="Введите ссылку"
+          @input="validateInput('imgSrc')"
         />
-        <small v-if="form.imgHref.error" class="form__error-msg">
+        <small v-if="form.imgSrc.error" class="form__error-msg">
           Это поле является обязательным
         </small>
       </div>
@@ -69,19 +69,21 @@
         </label>
         <input
           id="form-price"
-          v-model="form.price.value"
+          v-model.trim="form.price.value"
           type="text"
           class="form__input"
           :class="{ error: form.price.error }"
           placeholder="Введите цену"
+          @change="validateInput('price')"
         />
+        <!-- @input="maskPrice" -->
         <small v-if="form.price.error" class="form__error-msg">
           Это поле является обязательным
         </small>
       </div>
 
       <BaseButton
-        :disabled="!!form.disableSubmit"
+        :disabled="!!disableSubmit"
         class="btn-lg btn-submit form__add"
         aria-label="Добавить товар"
       >
@@ -93,6 +95,8 @@
 
 <script>
 export default {
+  emits: ['add-card'],
+
   data() {
     return {
       form: {
@@ -108,7 +112,7 @@ export default {
           error: false,
           required: false,
         },
-        imgHref: {
+        imgSrc: {
           touched: false,
           value: '',
           error: false,
@@ -120,18 +124,71 @@ export default {
           error: false,
           required: true,
         },
-        totalError: false,
-        disableSubmit: true,
       },
-    }
+      totalError: false,
+      disableSubmit: true,
+    };
   },
 
   computed: {},
 
   watch: {},
 
-  methods: {},
-}
+  methods: {
+    validateInput(field) {
+      this.form[field].touched = true;
+
+      if (this.form[field].value === '' && this.form[field].required) {
+        this.form[field].error = true;
+        this.totalError = true;
+        this.disableSubmit = true;
+
+        return;
+      }
+
+      this.form[field].error = false;
+      this.checkAllValidity(field);
+    },
+
+    /* maskPrice() {
+      this.form.price.value = this.form.price.value
+        .slice()
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }, */
+    checkAllValidity() {
+      const isAllReqInputsValid = Object.entries(this.form).every(
+        ([key, value]) => {
+          console.log({ key, value });
+          // return !value.error && value.touched;
+          return value.required ? !value.error && value.touched : true;
+        }
+      );
+      console.log('isAllReqInputsValid: ', isAllReqInputsValid);
+
+      if (isAllReqInputsValid) {
+        this.totalError = false;
+        this.disableSubmit = false;
+      }
+    },
+
+    submitForm() {
+      if (this.totalError || this.disableSubmit) return;
+
+      const newItem = {
+        id: parseFloat(Date.now().toString().slice(-4)),
+        name: this.form.name.value,
+        description: this.form.description.value,
+        imgSrc: this.form.imgSrc.value,
+        price: parseFloat(this.form.price.value),
+      };
+
+      console.log('newItem: ', newItem);
+
+      this.$emit('add-card', newItem);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

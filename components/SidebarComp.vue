@@ -19,22 +19,24 @@
 export default {
   data() {
     return {
-      isSidebarOpen: false,
-    }
+      // ! потом вернуть обратно
+      // isSidebarOpen: false,
+      isSidebarOpen: true,
+    };
   },
 
   computed: {
     iconToggleMenu() {
-      return this.isSidebarOpen ? 'close' : 'open'
+      return this.isSidebarOpen ? 'close' : 'open';
     },
   },
 
   methods: {
     toggleSidebar() {
-      this.isSidebarOpen = !this.isSidebarOpen
+      this.isSidebarOpen = !this.isSidebarOpen;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

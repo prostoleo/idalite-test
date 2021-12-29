@@ -14,7 +14,12 @@
           v-model.trim="form.name.value"
           type="text"
           class="form__input"
-          :class="{ error: form.name.error }"
+          :class="{
+            error: form.name.error,
+            success: form.name.required
+              ? !form.name.error && form.name.touched
+              : !form.name.error,
+          }"
           placeholder="Введите наименование товара"
           @input="validateInput('name', $event)"
         />
@@ -34,7 +39,12 @@
           id="form-description"
           v-model.trim="form.description.value"
           class="form__input form__input--textarea"
-          :class="{ error: form.description.error }"
+          :class="{
+            error: form.description.error,
+            success: form.description.required
+              ? !form.description.error && form.description.touched
+              : form.description.touched,
+          }"
           placeholder="Введите описание товара"
           @input="validateInput('description', $event)"
         ></textarea>
@@ -51,7 +61,12 @@
           v-model.trim="form.imgSrc.value"
           type="text"
           class="form__input"
-          :class="{ error: form.imgSrc.error }"
+          :class="{
+            error: form.imgSrc.error,
+            success: form.imgSrc.required
+              ? !form.imgSrc.error && form.imgSrc.touched
+              : !form.imgSrc.error,
+          }"
           placeholder="Введите ссылку"
           @input="validateInput('imgSrc', $event)"
         />
@@ -72,7 +87,12 @@
           v-model="form.price.value"
           type="text"
           class="form__input"
-          :class="{ error: form.price.error }"
+          :class="{
+            error: form.price.error,
+            success: form.price.required
+              ? !form.price.error && form.price.touched
+              : !form.price.error,
+          }"
           placeholder="Введите цену"
           @input="validateInput('price', $event)"
         />
@@ -326,11 +346,16 @@ export default {
     border-radius: 0.4rem;
     box-shadow: 0 0.2rem 0.5rem $dark-shadow;
 
+    transition: outline 100ms ease-in-out;
+
     /* &:last-of-type {
       margin-bottom: 2.4rem;
     } */
     &.error {
       outline: 1px solid $alert;
+    }
+    &.success {
+      outline: 1px solid $green;
     }
 
     &::placeholder {

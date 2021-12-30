@@ -85,6 +85,7 @@
           </label>
           <input
             id="form-price"
+            ref="formPrice"
             v-model="form.price.value"
             type="text"
             class="form__input"
@@ -96,6 +97,7 @@
             }"
             placeholder="Введите цену"
             @input="validateInput('price', $event)"
+            @blur="formatPrice"
           />
           <small v-if="form.price.error" class="form__error-msg">
             Это поле является обязательным
@@ -115,6 +117,8 @@
 </template>
 
 <script>
+import IMask from 'imask';
+
 export default {
   emits: ['close-form'],
 
@@ -149,6 +153,19 @@ export default {
       totalError: false,
       disableSubmit: true,
     };
+  },
+
+  mounted() {
+    // eslint-disable-next-line no-unused-vars
+    const currencyMask = IMask(this.$refs.formPrice, {
+      mask: 'num',
+      blocks: {
+        num: {
+          mask: Number,
+          thousandsSeparator: ' ',
+        },
+      },
+    });
   },
 
   methods: {

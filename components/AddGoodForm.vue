@@ -97,7 +97,6 @@
             }"
             placeholder="Введите цену"
             @input="validateInput('price', $event)"
-            @blur="formatPrice"
           />
           <small v-if="form.price.error" class="form__error-msg">
             Это поле является обязательным
@@ -254,7 +253,7 @@ export default {
     max-width: 33.2rem;
     width: 100%;
     // width: 100%;
-    padding: 2.4rem 2.2rem 2.4rem 2.6rem;
+    padding: 2.4rem 2.2rem;
 
     // margin-top: 3.5rem;
 
@@ -359,11 +358,13 @@ export default {
   // .form__input
 
   &__input {
+    display: block;
     width: 100%;
 
     font-size: 1.2rem;
     font-weight: 400;
-    padding: 0.8333em 1.3333em 0.9167em 1.3333em;
+    // padding: 0.8333em 1.3333em 0.9167em 1.3333em;
+    padding: 1rem 1.6rem 1.1rem;
 
     // margin-bottom: 1.6rem;
 
@@ -398,7 +399,10 @@ export default {
   // .form__input--textarea
 
   &__input--textarea {
-    resize: vertical;
+    resize: none;
+    max-height: 10.8rem;
+
+    height: 100%;
   }
 
   // .form__error-msg
@@ -410,7 +414,7 @@ export default {
 
     font-size: 0.8rem;
     font-weight: 400;
-    letter-spacing: -2%;
+    letter-spacing: -0.02em;
 
     color: $alert;
   }

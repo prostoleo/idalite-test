@@ -22,7 +22,7 @@ export default {
     sortBy: {
       type: String,
       required: true,
-      default: 'по умолчанию',
+      default: 'По умолчанию',
     },
   },
   data() {
@@ -33,13 +33,13 @@ export default {
       return this.$store.getters.getCards;
     },
     currentCards() {
-      if (this.sortBy === 'по наименованию') {
+      if (this.sortBy.toLowerCase() === 'по наименованию') {
         return this.cards.slice().sort((a, b) => a.name.localeCompare(b.name));
       }
-      if (this.sortBy === 'по возрастанию цены') {
+      if (this.sortBy.toLowerCase() === 'по возрастанию цены') {
         return this.cards.slice().sort((a, b) => a.price - b.price);
       }
-      if (this.sortBy === 'по убыванию цены') {
+      if (this.sortBy.toLowerCase() === 'по убыванию цены') {
         return this.cards.slice().sort((a, b) => b.price - a.price);
       }
       return this.cards;

@@ -18,8 +18,10 @@ export default {};
 
 .btn-submit {
   font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
 
-  padding: 0.8333em 0 0.9167em;
+  padding: 1rem 0 1.1rem;
 
   color: $white;
   background: $green;
@@ -27,7 +29,7 @@ export default {};
   box-shadow: 0 0.2rem 0.4rem $dark-shadow;
   // border: 1px solid transparent;
 
-  letter-spacing: -2%;
+  letter-spacing: -0.02em;
 
   transition: all 150ms ease-in-out;
 

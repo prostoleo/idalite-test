@@ -1,15 +1,13 @@
 <template>
   <div
+    ref="customSelect"
     class="custom-select"
     :tabindex="tabindex"
     @keydown.space="openSelectOnSpace"
     @keydown.esc="escapeSelect"
   >
-    <div
-      class="custom-select__selected"
-      :class="{ open: open }"
-      @click="open = !open"
-    >
+    <div class="custom-select__selected" @click="toggleOptions">
+      <!-- :class="{ open: open }" -->
       <span>{{ selected }}</span>
       <img
         :class="{ active: !!open }"
@@ -18,7 +16,7 @@
         width="7.2"
       />
     </div>
-    <div class="custom-select__items" :class="{ selectHide: !open }">
+    <div v-if="open" class="custom-select__items">
       <div
         v-for="(option, i) of options"
         :key="i"
@@ -61,8 +59,22 @@ export default {
       open: false,
     };
   },
+
   mounted() {
     this.$emit('select', this.selected);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Escape' && this.open) {
+        this.$refs.customSelect.focus();
+        this.open = false;
+      }
+    });
+
+    document.querySelector('body').addEventListener('click', (e) => {
+      if (!e.target.closest('.custom-select') && this.open) {
+        this.open = false;
+      }
+    });
   },
 
   methods: {
@@ -87,6 +99,10 @@ export default {
 
       target.focus();
       this.open = false;
+    },
+
+    toggleOptions() {
+      this.open = !this.open;
     },
   },
 };

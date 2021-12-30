@@ -112,7 +112,7 @@ export default {
   }
 
   &--wrapper {
-    margin-top: 2.5rem;
+    margin-top: 1.6rem;
   }
 
   &__item {

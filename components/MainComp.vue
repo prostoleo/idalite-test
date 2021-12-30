@@ -18,22 +18,22 @@ export default {
   data() {
     return {
       options: [
-        'по умолчанию',
-        'по наименованию',
-        'по возрастанию цены',
-        'по убыванию цены',
+        'По умолчанию',
+        'По наименованию',
+        'По возрастанию цены',
+        'По убыванию цены',
       ],
-      defaultOption: 'по умолчанию',
-      currentOption: 'по умолчанию',
-    }
+      defaultOption: 'По умолчанию',
+      currentOption: 'По умолчанию',
+    };
   },
 
   methods: {
     selectOption(option) {
-      this.currentOption = option
+      this.currentOption = option;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

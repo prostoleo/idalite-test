@@ -105,6 +105,7 @@ export default {
   &__title {
     font-size: 2rem;
     font-weight: 600;
+    line-height: 125%;
 
     color: $blackish;
   }
@@ -115,6 +116,7 @@ export default {
     margin-top: 1em;
     font-size: 1.6rem;
     font-weight: 400;
+    line-height: 125%;
 
     color: $greyish;
   }
@@ -128,6 +130,7 @@ export default {
   // .card__price
 
   &__price {
+    display: inline-block;
     font-size: 2.4rem;
     font-weight: 600;
 

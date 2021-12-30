@@ -2,103 +2,105 @@
   <div class="form--wrapper">
     <h2 class="sidebar__title">Добавление товара</h2>
     <form ref="formEl" class="form" @submit.prevent="submitForm">
-      <div class="form__row">
-        <label
-          for="#form-name"
-          class="form__label"
-          :class="{ required: form.name.required }"
-          >Наименование товара</label
-        >
-        <input
-          id="form-name"
-          v-model.trim="form.name.value"
-          type="text"
-          class="form__input"
-          :class="{
-            error: form.name.error,
-            success: form.name.required
-              ? !form.name.error && form.name.touched
-              : !form.name.error,
-          }"
-          placeholder="Введите наименование товара"
-          @input="validateInput('name', $event)"
-        />
-        <small v-if="form.name.error" class="form__error-msg">
-          Это поле является обязательным
-        </small>
-      </div>
-      <div class="form__row">
-        <label
-          for="form-description"
-          class="form__label"
-          :class="{ required: form.description.required }"
-        >
-          Описание товара
-        </label>
-        <textarea
-          id="form-description"
-          v-model.trim="form.description.value"
-          class="form__input form__input--textarea"
-          :class="{
-            error: form.description.error,
-            success: form.description.required
-              ? !form.description.error && form.description.touched
-              : form.description.touched,
-          }"
-          placeholder="Введите описание товара"
-          @input="validateInput('description', $event)"
-        ></textarea>
-      </div>
-      <div class="form__row">
-        <label
-          for="form-image"
-          class="form__label"
-          :class="{ required: form.imgSrc.required }"
-          >Ссылка на изображение товара</label
-        >
-        <input
-          id="form-image"
-          v-model.trim="form.imgSrc.value"
-          type="text"
-          class="form__input"
-          :class="{
-            error: form.imgSrc.error,
-            success: form.imgSrc.required
-              ? !form.imgSrc.error && form.imgSrc.touched
-              : !form.imgSrc.error,
-          }"
-          placeholder="Введите ссылку"
-          @input="validateInput('imgSrc', $event)"
-        />
-        <small v-if="form.imgSrc.error" class="form__error-msg">
-          Это поле является обязательным
-        </small>
-      </div>
-      <div class="form__row">
-        <label
-          for="#form-price"
-          class="form__label"
-          :class="{ required: form.price.required }"
-        >
-          Цена товара
-        </label>
-        <input
-          id="form-price"
-          v-model="form.price.value"
-          type="text"
-          class="form__input"
-          :class="{
-            error: form.price.error,
-            success: form.price.required
-              ? !form.price.error && form.price.touched
-              : !form.price.error,
-          }"
-          placeholder="Введите цену"
-          @input="validateInput('price', $event)"
-        />
-        <small v-if="form.price.error" class="form__error-msg">
-          Это поле является обязательным
-        </small>
+      <div class="form__inputs">
+        <div class="form__row">
+          <label
+            for="#form-name"
+            class="form__label"
+            :class="{ required: form.name.required }"
+            >Наименование товара</label
+          >
+          <input
+            id="form-name"
+            v-model.trim="form.name.value"
+            type="text"
+            class="form__input"
+            :class="{
+              error: form.name.error,
+              success: form.name.required
+                ? !form.name.error && form.name.touched
+                : !form.name.error,
+            }"
+            placeholder="Введите наименование товара"
+            @input="validateInput('name', $event)"
+          />
+          <small v-if="form.name.error" class="form__error-msg">
+            Это поле является обязательным
+          </small>
+        </div>
+        <div class="form__row">
+          <label
+            for="form-description"
+            class="form__label"
+            :class="{ required: form.description.required }"
+          >
+            Описание товара
+          </label>
+          <textarea
+            id="form-description"
+            v-model.trim="form.description.value"
+            class="form__input form__input--textarea"
+            :class="{
+              error: form.description.error,
+              success: form.description.required
+                ? !form.description.error && form.description.touched
+                : form.description.touched,
+            }"
+            placeholder="Введите описание товара"
+            @input="validateInput('description', $event)"
+          ></textarea>
+        </div>
+        <div class="form__row">
+          <label
+            for="form-image"
+            class="form__label"
+            :class="{ required: form.imgSrc.required }"
+            >Ссылка на изображение товара</label
+          >
+          <input
+            id="form-image"
+            v-model.trim="form.imgSrc.value"
+            type="text"
+            class="form__input"
+            :class="{
+              error: form.imgSrc.error,
+              success: form.imgSrc.required
+                ? !form.imgSrc.error && form.imgSrc.touched
+                : !form.imgSrc.error,
+            }"
+            placeholder="Введите ссылку"
+            @input="validateInput('imgSrc', $event)"
+          />
+          <small v-if="form.imgSrc.error" class="form__error-msg">
+            Это поле является обязательным
+          </small>
+        </div>
+        <div class="form__row">
+          <label
+            for="#form-price"
+            class="form__label"
+            :class="{ required: form.price.required }"
+          >
+            Цена товара
+          </label>
+          <input
+            id="form-price"
+            v-model="form.price.value"
+            type="text"
+            class="form__input"
+            :class="{
+              error: form.price.error,
+              success: form.price.required
+                ? !form.price.error && form.price.touched
+                : !form.price.error,
+            }"
+            placeholder="Введите цену"
+            @input="validateInput('price', $event)"
+          />
+          <small v-if="form.price.error" class="form__error-msg">
+            Это поле является обязательным
+          </small>
+        </div>
       </div>
 
       <BaseButton
@@ -218,16 +220,16 @@ export default {
     font-size: 2.4rem;
     font-weight: 600;
 
-    margin-bottom: 1.25em;
+    margin-bottom: 1.6rem;
 
     color: $blackish;
   }
 }
 .form {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
 
-  gap: 1.6rem;
+  // gap: 1.6rem;
 
   position: relative;
 
@@ -237,7 +239,7 @@ export default {
     // width: 100%;
     padding: 2.4rem 2.2rem 2.4rem 2.6rem;
 
-    margin-top: 3.5rem;
+    // margin-top: 3.5rem;
 
     background: $bg-card;
 
@@ -290,6 +292,14 @@ export default {
     }
   }
 
+  // .form__inputs
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.6rem;
+  }
+
   // .form__row
 
   &__row {
@@ -304,8 +314,9 @@ export default {
 
     font-size: 1rem;
     font-weight: 400;
+    line-height: 130%;
 
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.4em;
 
     position: relative;
 
@@ -335,7 +346,7 @@ export default {
 
     font-size: 1.2rem;
     font-weight: 400;
-    padding: 0.83em 1.33em;
+    padding: 0.8333em 1.3333em 0.9167em 1.3333em;
 
     // margin-bottom: 1.6rem;
 

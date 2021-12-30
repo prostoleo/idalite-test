@@ -11,7 +11,12 @@
       @click="open = !open"
     >
       <span>{{ selected }}</span>
-      <img :class="{ active: !!open }" src="/arrow.svg" alt="иконка стрелки" />
+      <img
+        :class="{ active: !!open }"
+        src="/arrow-def.svg"
+        alt="иконка стрелки"
+        width="7.2"
+      />
     </div>
     <div class="custom-select__items" :class="{ selectHide: !open }">
       <div
@@ -108,7 +113,8 @@ export default {
     justify-content: center;
     gap: 0.5rem;
 
-    padding: 0.83em 1.33em;
+    // font-size: 1.2rem;
+    padding: 1em 1.6em 1.1em 1.6em;
     background-color: $bg-card;
     border-radius: 0.4rem;
     color: $light-grey;
@@ -119,7 +125,9 @@ export default {
     box-shadow: 0 0.2rem 0.5rem $dark-shadow;
 
     span {
+      display: inline-block;
       font-size: 1.2rem;
+      line-height: 125%;
       font-weight: 400;
       color: $light-grey;
     }

@@ -11,7 +11,7 @@
         alt="Иконка открыть / закрыть меню"
       />
     </button>
-    <AddGoodForm
+    <LazyAddGoodForm
       :class="{ active: isSidebarOpen }"
       @close-form="isSidebarOpen = false"
     />

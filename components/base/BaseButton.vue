@@ -5,7 +5,7 @@
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -19,7 +19,7 @@ export default {}
 .btn-submit {
   font-size: 1.2rem;
 
-  padding: 1rem;
+  padding: 0.8333em 0 0.9167em;
 
   color: $white;
   background: $green;
